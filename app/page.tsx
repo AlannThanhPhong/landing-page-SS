@@ -1,5 +1,6 @@
 import { DevDesHome } from "@/components/devdes-home";
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import "./home.css";
 
 export const metadata: Metadata = {
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
-  return <DevDesHome />;
+export default async function Home() {
+  const requestHeaders = await headers();
+  const countryCode =
+    requestHeaders.get("x-vercel-ip-country") ??
+    requestHeaders.get("cf-ipcountry");
+
+  return <DevDesHome isVietnam={countryCode?.toUpperCase() === "VN"} />;
 }

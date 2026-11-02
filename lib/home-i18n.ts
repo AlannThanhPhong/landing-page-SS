@@ -415,7 +415,7 @@ const pricingPlans: Record<Locale, PricingPlan[]> = {
   ],
 };
 
-export function getHomeContent(locale: Locale): {
+export function getHomeContent(locale: Locale, isVietnam = true): {
   copy: (typeof copy)[Locale];
   services: HomeService[];
   filters: { id: HomeFilterId; label: string; tag?: string }[];
@@ -429,6 +429,16 @@ export function getHomeContent(locale: Locale): {
     filters: filters[locale],
     projects: getProjectSources(locale),
     testimonials: testimonials[locale],
-    pricingPlans: pricingPlans[locale],
+    pricingPlans: isVietnam
+      ? pricingPlans[locale]
+      : pricingPlans[locale].map((plan, index) => {
+          if (index === 0) {
+            return { ...plan, price: "$219" };
+          }
+          if (index === 1) {
+            return { ...plan, price: "$499" };
+          }
+          return plan;
+        }),
   };
 }

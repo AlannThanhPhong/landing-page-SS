@@ -152,9 +152,9 @@ function Dashboard({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export function DevDesHome() {
+export function DevDesHome({ isVietnam }: { isVietnam: boolean }) {
   const { locale } = useLocale();
-  const content = getHomeContent(locale);
+  const content = getHomeContent(locale, isVietnam);
   const { copy, filters, pricingPlans, projects, services, testimonials } = content;
   const homeRef = useScrollTheme();
   const [menuOpen, setMenuOpen] = useState(false);
