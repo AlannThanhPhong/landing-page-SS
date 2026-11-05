@@ -16,7 +16,7 @@ export const homeSections: Record<
 };
 
 export const homeContact = {
-  email: "devdes.space@gmail.com",
+  email: "devdes.click@gmail.com",
 };
 
 export const pricingPlans = [
